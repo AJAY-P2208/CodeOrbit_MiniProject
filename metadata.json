@@ -1,0 +1,6 @@
+{
+  "name": "Finova",
+  "description": "Finova is a professional financial management application designed to help you track, manage, and grow your wealth with smart insights and a beautiful interface.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": []
+}

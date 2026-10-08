@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "transaction": {
+      "title": "Transaction",
+      "description": "An income or expense entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "amount", "type", "category", "date"]
+    },
+    "budget": {
+      "title": "Budget",
+      "description": "A monthly budget for a category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "category": { "type": "string" },
+        "limit": { "type": "number" },
+        "month": { "type": "string" },
+        "year": { "type": "string" }
+      },
+      "required": ["userId", "category", "limit", "month", "year"]
+    },
+    "userProfile": {
+      "title": "User Profile",
+      "description": "User preferences and summary",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "currency": { "type": "string" },
+        "name": { "type": "string" },
+        "bio": { "type": "string" },
+        "financialGoals": { "type": "string" },
+        "savingsTargets": { "type": "string" },
+        "joinedAt": { "type": "string", "format": "date-time" },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "icon": { "type": "string" },
+              "budget": { "type": "number" }
+            }
+          }
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/transactions/{transactionId}": {
+      "schema": "transaction",
+      "description": "Individual transactions"
+    },
+    "/budgets/{budgetId}": {
+      "schema": "budget",
+      "description": "Budget limits per category"
+    },
+    "/users/{userId}": {
+      "schema": "userProfile",
+      "description": "User profiles"
+    }
+  }
+}
